@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-
 import PortfolioItem from "./portfolio-item";
 
 export default class PortfolioContainer extends Component {
@@ -15,9 +14,7 @@ export default class PortfolioContainer extends Component {
     };
 
     this.handleFilter = this.handleFilter.bind(this);
-
   }
-  
 
   handleFilter(filter) {
     this.setState({
@@ -27,32 +24,26 @@ export default class PortfolioContainer extends Component {
     });
   }
 
-  getPortfolioItems(){
+  getPortfolioItems() {
     axios
-
-    .get('https://akomarley.devcamp.space/portfolio/portfolio_items')
-    .then(response => {
-      // console.log("Response data",response);
-      this.setState({
-        data: response.data.portfolio_items
+      .get("https://jordan.devcamp.space/portfolio/portfolio_items")
+      .then(response => {
+        this.setState({
+          data: response.data.portfolio_items
+        });
       })
-    })
-
-    .catch(error => {
-      console.log(error);
-    })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   portfolioItems() {
     return this.state.data.map(item => {
-      console.log("item data" ,item)
-      return (
-        <PortfolioItem title={item.name} url={item.url} slug={item.id} />
-      );
+      return <PortfolioItem key={item.id} item={item} />;
     });
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getPortfolioItems();
   }
 
@@ -62,16 +53,14 @@ export default class PortfolioContainer extends Component {
     }
 
     return (
-      <div>
-        <h2>{this.state.pageTitle}</h2>
-
-        <button onClick={() => this.handleFilter("eCommerce")}>
+      <div className="portfolio-items-wrapper">
+        <button className="btn" onClick={() => this.handleFilter("eCommerce")}>
           eCommerce
         </button>
-        <button onClick={() => this.handleFilter("Scheduling")}>
+        <button className="btn" onClick={() => this.handleFilter("Scheduling")}>
           Scheduling
         </button>
-        <button onClick={() => this.handleFilter("Enterprise")}>
+        <button className="btn" onClick={() => this.handleFilter("Enterprise")}>
           Enterprise
         </button>
 

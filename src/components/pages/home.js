@@ -1,9 +1,11 @@
 import React from "react";
 
-export default function(){
-    return (
-        <div>
-            Homepage
-        </div>
-    )
+import PortfolioContainer from "../portfolio/portfolio-container";
+
+export default function() {
+  return (
+    <div>
+      <PortfolioContainer />
+    </div>
+  );
 }
